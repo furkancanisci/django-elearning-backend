@@ -1,0 +1,96 @@
+{% extends 'student_template/base_template.html' %}
+
+{% block page_title %}
+    Ders videoları
+{% endblock page_title %}
+
+{% block main_content %}
+
+{% load static %}
+
+<section class="content">
+        <div class="container-fluid">
+
+
+
+            {% if messages %}
+                                <div class="form-group">
+                                <div class="col-12">
+                                    {% for message in messages %}
+                                    {% if message.tags == "error" %}
+                                        <div class="alert alert-danger alert-dismissible fade show" role="alert" style="margin-top: 10px;">
+                                        {{ message }}
+                                        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                            <span aria-hidden="true">&times;</span>
+                                        </button>
+                                        </div>
+                                    {% elif message.tags == "success" %}
+                                        <div class="alert alert-success alert-dismissible fade show" role="alert" style="margin-top: 10px;">
+                                        {{ message }}
+                                        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                            <span aria-hidden="true">&times;</span>
+                                        </button>
+                                        </div>
+                                    {% endif %}
+                                    {% endfor %}
+                                </div>
+                                </div>
+                                {% endif %}
+
+            <div class="row">
+                <div class="col-md-12">
+                    <!-- general form elements -->
+                    <div class="card">
+                        <div class="card-header">
+                            <h3 class="card-title">Ders listesi</h3>
+                        </div>
+                        <!-- /.card-header -->
+                        <div class="card-body table-responsive p-0">
+                            <table class="table table-hover text-nowrap">
+                            <thead>
+                                <tr>
+                                <th>ID</th>
+                                <th>Ders Adı</th>
+                                <th>Dakika</th>
+                                <th>Video Url</th>
+                                <th>Yüklenme Tarihi</th>
+                                    <th>Güncellenme Tarihi</th>
+                                </tr>
+                            </thead>
+                                <tbody>
+                                    <tr>
+                                        <td>{{ lesson_obj.id }}</td>
+                                        <td>{{ lesson_obj.title }}</td>
+                                        <td>{{ lesson_text.duration }}</td>
+                                        <td>{{ lesson_text.video_url }}</td>
+                                        <td>{{ lesson_obj.created_at }}</td>
+                                        <td>{{ lesson_obj.updated_at }}</td>
+                                    </tr>
+
+
+                                   </tbody>
+                            </table>
+
+
+                             <div class="col-lg-9" id="video_player_area">
+                <div class="" style="background-color: #333;">
+                    <div class="embed-responsive embed-responsive-16by9">
+                        <iframe width="100%" height="500" class="embed-responsive-item"
+                                src="{{ lesson_obj.video_url }}" frameborder="1"
+                                allowfullscreen>
+                        </iframe>
+                    </div>
+                </div>
+            </div>
+                        </div>
+                        <!-- /.card-body -->
+                        </div>
+                    <!-- /.card -->
+
+                </div>
+            </div>
+
+        </div><!-- /.container-fluid -->
+      </section>
+
+  {% endblock main_content %}
